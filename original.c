@@ -25,7 +25,8 @@ int main(int argc, char *argv[]) {
 
     while ((packet = pcap_next(handle, &header)) != NULL) {
         ip_header = (struct iphdr*)(packet + sizeof(struct ethhdr));
-        printf("Packet %d: IP destination address: %s\n", ++packet_count, inet_ntoa(*((struct in_addr*)ip_header->daddr)));
+        //printf("Packet %d: IP destination address: %s\n", ++packet_count, inet_ntoa(*((struct in_addr*)ip_header->daddr)));
+	printf("Packet %d: IP destination address: %s\n", ++packet_count, inet_ntoa(*(struct in_addr*)&ip_header->daddr));
     }
 
     pcap_close(handle);
